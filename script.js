@@ -103,8 +103,4 @@ function hideIpButton() {
   }, 1000);
 }
 
-let tempD = getFromCache();
-
-if( tempD ) {
-  render( tempD );
-}
+getIpAddress();
