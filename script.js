@@ -1,4 +1,5 @@
 const getIpBtn = document.getElementById('get-ip-btn');
+const cardLoader = document.querySelector('.card-loader');
 const resultBox = document.getElementById('result-box');
 const CACHE_TIMEOUT = 60 * 10 * 1000;
 
@@ -34,6 +35,7 @@ function render( data ) {
 
   // Display the results and a success message
   resultBox.style.display = 'flex';
+  cardLoader.style.display = 'none';
 
   hideIpButton();
 }
@@ -55,11 +57,10 @@ async function getIpAddress() {
 
   let d = getFromCache();
   if ( d ) {
-    return render( d );
+    return render(d);
   }
 
   try {
-    showToast('Fetching IP address...');
     const response = await fetch(API_ENDPOINT);
 
     if (!response.ok) {
@@ -79,7 +80,6 @@ async function getIpAddress() {
     }))
 
     render( data );
-    showToast('Information fetched.');
 
   } catch (error) {
     console.error('Error fetching IP information:', error);
